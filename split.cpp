@@ -10,7 +10,10 @@ split.h.  **Do NOT add main() to this file**.  When you submit
 the function below should be the only one in this file.
 */
 
+#include "cstddef"
 #include "split.h"
+using namespace std;
+
 
 /* Add a prototype for a helper function here if you need */
 
@@ -18,6 +21,23 @@ void split(Node*& in, Node*& odds, Node*& evens)
 {
   /* Add code here */
 // WRITE YOUR CODE HERE
+  if(in==NULL){
+    return;
+  }
+  else if ((in->value%2)==0){
+    //evens
+    evens=in;
+    in=in->next;
+    evens->next=NULL;
+    split(in,odds,evens->next);
+  }
+  else if ((in->value%2)==1){
+    //odds
+    odds=in;
+    in=in->next;
+    odds->next=NULL;
+    split(in,odds->next,evens);
+  }
 }
 
 /* If you needed a helper function, write it here */
